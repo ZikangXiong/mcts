@@ -46,6 +46,14 @@ def best_child(state_node, tree_policy):
     return best_action_node.sample_state()
 
 
+def next_layer_node(state_node, tree_policy):
+    if state_node.untried_actions:
+        return expand(state_node)
+    else:
+        state_node = best_child(state_node, tree_policy)
+    return state_node
+
+
 def get_next_node(state_node, tree_policy):
     while not state_node.state.is_terminal():
         if state_node.untried_actions:
